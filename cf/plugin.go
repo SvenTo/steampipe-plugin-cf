@@ -17,8 +17,9 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		// TODO: check if correct:
 		DefaultTransform: transform.FromGo().NullIfZero(),
 		TableMap: map[string]*plugin.Table{
-			"cf_org":       tableCfOrg(ctx),
-			"cf_org_v3":    tableCfOrgV3(ctx),
+			"cf_org":      tableCfOrg(ctx),
+			"cf_org_v3":   tableCfOrgV3(ctx),
+			"cf_space_v3": tableCfSpaceV3(ctx),
 		},
 	}
 	return p
