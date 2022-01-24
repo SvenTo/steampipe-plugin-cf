@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/url"
 
+	"github.com/cloudfoundry-community/go-cfclient"
 	"github.com/turbot/steampipe-plugin-sdk/grpc/proto"
 	"github.com/turbot/steampipe-plugin-sdk/plugin"
 	"github.com/turbot/steampipe-plugin-sdk/plugin/transform"
@@ -17,8 +18,8 @@ func tableCfSpaceV3(ctx context.Context) *plugin.Table {
 			Hydrate: listSpaceV3,
 		},
 		Get: &plugin.GetConfig{
-			// TODO: Add organization_guid
-			KeyColumns:        plugin.AnyColumn([]string{"guid", "name"}),
+			// name cannot be a key column because it is not unique across orgs
+			KeyColumns:        plugin.SingleColumn("guid"),
 			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
 			Hydrate:           getSpaceV3,
 		},
@@ -30,12 +31,17 @@ func tableCfSpaceV3(ctx context.Context) *plugin.Table {
 				Transform:   transform.FromField("GUID"),
 			},
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Name of the space"},
+			{
+				Name:        "org_guid",
+				Type:        proto.ColumnType_STRING,
+				Description: "Unique identifier for the organization.",
+				Transform:   transform.From(transformOrganizationGuid),
+			},
 			{Name: "created_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was created"},
 			{Name: "updated_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was last updated"},
 			{Name: "metadata", Type: proto.ColumnType_JSON, Description: "Labels applied and annotations added to the space"},
 			{Name: "links", Type: proto.ColumnType_JSON, Description: "Links to related resources"},
 			{Name: "relationships", Type: proto.ColumnType_JSON, Description: "Relationship to the quota applied to the space and the organization the space is contained in"},
-			// TODO: Add organization_guid
 		},
 	}
 }
@@ -66,19 +72,22 @@ func getSpaceV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 	}
 
 	q := url.Values{}
-	if name, ok := d.KeyColumnQuals["name"]; ok {
-		q.Add("names", name.GetStringValue())
-	} else if guid, ok := d.KeyColumnQuals["guid"]; ok {
-		q.Add("guids", guid.GetStringValue())
-	}
-	// TODO: Add organization_guid
+	q.Add("guids", d.KeyColumnQuals["guid"].GetStringValue())
 
 	items, err := conn.ListV3SpacesByQuery(q)
 
 	if err != nil {
 		plugin.Logger(ctx).Error("cf_org.getSpaceV3", "query_error", err)
 		return nil, err
+	} else if len(items) == 0 {
+		return nil, nil
 	}
-	// TODO: Check length for >0
 	return items[0], err
+}
+
+//// TRANSFORM FUNCTION
+
+func transformOrganizationGuid(_ context.Context, d *transform.TransformData) (interface{}, error) {
+	data := d.HydrateItem.(cfclient.V3Space)
+	return data.Relationships["organization"].Data.GUID, nil
 }
