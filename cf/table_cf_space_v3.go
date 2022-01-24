@@ -52,6 +52,7 @@ func listSpaceV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 		plugin.Logger(ctx).Error("cf_org.listSpaceV3", "connection_error", err)
 		return nil, err
 	}
+
 	items, err := client.ListV3SpacesByQuery(url.Values{})
 	if err != nil {
 		plugin.Logger(ctx).Error("cf_org.listSpaceV3", "query_error", err)

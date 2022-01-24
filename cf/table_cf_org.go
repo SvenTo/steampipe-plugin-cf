@@ -22,7 +22,6 @@ func tableCfOrg(ctx context.Context) *plugin.Table {
 			Hydrate:           getOrg,
 		},
 		Columns: []*plugin.Column{
-			// Top columns
 			{
 				Name:        "guid",
 				Type:        proto.ColumnType_STRING,
