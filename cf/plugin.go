@@ -20,6 +20,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"cf_org":      tableCfOrg(ctx),
 			"cf_org_v3":   tableCfOrgV3(ctx),
 			"cf_space_v3": tableCfSpaceV3(ctx),
+			"cf_app_v3":   tableCfAppV3(ctx),
 		},
 	}
 	return p
