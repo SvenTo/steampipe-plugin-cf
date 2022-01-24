@@ -54,3 +54,11 @@ Further reading about the Cloud Foundry API:
 - [Cloud Foundry V2 API docs](https://apidocs.cloudfoundry.org/16.22.0/)
 - [Cloud Foundry Concepts](https://docs.cloudfoundry.org/concepts/index.html)
 
+## Contributing
+
+Please see the [contribution guidelines](https://github.com/turbot/steampipe/blob/main/CONTRIBUTING.md) and our [code of conduct](https://github.com/turbot/steampipe/blob/main/CODE_OF_CONDUCT.md). All contributions are subject to the [Apache 2.0 open source license](https://github.com/SvenTo/steampipe-plugin-cf/blob/main/LICENSE).
+
+`help wanted` issues:
+
+- [Steampipe](https://github.com/turbot/steampipe/labels/help%20wanted)
+- [CF Plugin](https://github.com/SvenTo/steampipe-plugin-cf/issues/labels/help%20wanted)
