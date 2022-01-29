@@ -2,6 +2,7 @@
 
 Use SQL to query apps, spaces and more from Cloud Foundry.
 
+- **[Get started →](https://github.com/SvenTo/steampipe-plugin-cf/blob/main/docs/index.md)**
 - Documentation: [Table definitions & examples](https://github.com/SvenTo/steampipe-plugin-cf/tree/main/docs/tables)
 - Community: [Slack Channel](https://join.slack.com/t/steampipe/shared_invite/zt-oij778tv-lYyRTWOTMQYBVAbtPSWs3g)
 - Get involved: [Issues](https://github.com/SvenTo/steampipe-plugin-cf/issues)
