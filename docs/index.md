@@ -24,9 +24,9 @@ select
   s.name as space_name,
   o.name as org_name
 from
-  cf_app_v3 as a,
-  cf_space_v3 as s,
-  cf_org_v3 as o
+  cf_app as a,
+  cf_space as s,
+  cf_org as o
 where
   s.org_guid = o.guid and 
   a.space_guid = s.guid;

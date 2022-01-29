@@ -9,17 +9,17 @@ import (
 	"github.com/turbot/steampipe-plugin-sdk/plugin/transform"
 )
 
-func tableCfOrgV3(ctx context.Context) *plugin.Table {
+func tableCfOrg(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "cf_org_v3",
+		Name:        "cf_org",
 		Description: "Organizations the Cloud Foundry user has access to (v3 API).",
 		List: &plugin.ListConfig{
-			Hydrate: listOrgV3,
+			Hydrate: listOrg,
 		},
 		Get: &plugin.GetConfig{
 			KeyColumns:        plugin.AnyColumn([]string{"guid", "name"}),
 			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
-			Hydrate:           getOrgV3,
+			Hydrate:           getOrg,
 		},
 		Columns: []*plugin.Column{
 			{
@@ -39,15 +39,15 @@ func tableCfOrgV3(ctx context.Context) *plugin.Table {
 	}
 }
 
-func listOrgV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func listOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	client, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listOrgV3", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org.listOrg", "connection_error", err)
 		return nil, err
 	}
 	items, err := client.ListV3OrganizationsByQuery(url.Values{})
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listOrgV3", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org.listOrg", "query_error", err)
 		return nil, err
 	}
 
@@ -57,10 +57,10 @@ func listOrgV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 	return nil, nil
 }
 
-func getOrgV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func getOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getOrgV3", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org.getOrg", "connection_error", err)
 		return nil, err
 	}
 
@@ -74,7 +74,7 @@ func getOrgV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (
 	items, err := conn.ListV3OrganizationsByQuery(q)
 
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getOrgV3", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org.getOrg", "query_error", err)
 		return nil, err
 	}
 	return items[0], err

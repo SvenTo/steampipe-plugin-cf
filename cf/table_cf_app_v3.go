@@ -10,18 +10,18 @@ import (
 	"github.com/turbot/steampipe-plugin-sdk/plugin/transform"
 )
 
-func tableCfAppV3(ctx context.Context) *plugin.Table {
+func tableCfApp(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "cf_app_v3",
+		Name:        "cf_app",
 		Description: "Apps the user has access to (v3 API).",
 		List: &plugin.ListConfig{
-			Hydrate: listAppV3,
+			Hydrate: listApp,
 		},
 		Get: &plugin.GetConfig{
 			// TODO: Add organization_guid
 			KeyColumns:        plugin.SingleColumn("guid"),
 			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
-			Hydrate:           getAppV3,
+			Hydrate:           getApp,
 		},
 		Columns: []*plugin.Column{
 			{
@@ -48,15 +48,15 @@ func tableCfAppV3(ctx context.Context) *plugin.Table {
 	}
 }
 
-func listAppV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func listApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	client, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listAppV3", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org.listApp", "connection_error", err)
 		return nil, err
 	}
 	items, err := client.ListV3AppsByQuery(url.Values{})
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listAppV3", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org.listApp", "query_error", err)
 		return nil, err
 	}
 
@@ -66,10 +66,10 @@ func listAppV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 	return nil, nil
 }
 
-func getAppV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func getApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getAppV3", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org.getApp", "connection_error", err)
 		return nil, err
 	}
 
@@ -79,7 +79,7 @@ func getAppV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (
 	items, err := conn.ListV3AppsByQuery(q)
 
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getAppV3", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org.getApp", "query_error", err)
 		return nil, err
 	}
 	// TODO: check for length

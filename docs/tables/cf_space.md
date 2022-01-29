@@ -1,4 +1,4 @@
-# Table: cf_space_v3
+# Table: cf_space
 
 Retrieve all Cloud Foundry [spaces](https://docs.cloudfoundry.org/concepts/roles.html#spaces) ([v3](http://v3-apidocs.cloudfoundry.org/version/3.113.0/index.html#spaces)) the user has access to.
 
@@ -10,7 +10,7 @@ Retrieve all Cloud Foundry [spaces](https://docs.cloudfoundry.org/concepts/roles
 select
   *
 from
-  cf_space_v3
+  cf_space
 ```
 
 ### Select name and the value of the label foo
@@ -20,7 +20,7 @@ select
   name,
   metadata -> 'labels' ->> 'foo' as label_foo
 from
-  cf_space_v3
+  cf_space
 ```
 
 See also [Querying JSON](https://steampipe.io/docs/sql/querying-json)
@@ -31,7 +31,7 @@ See also [Querying JSON](https://steampipe.io/docs/sql/querying-json)
 select
   *
 from
-  cf_space_v3
+  cf_space
 where
   name = 'sample_space'
 ```
@@ -42,7 +42,7 @@ where
 select
   *
 from
-  cf_space_v3
+  cf_space
 where
   guid = 'deadbeef-4242-4242-dead-beef42420001'
 ```

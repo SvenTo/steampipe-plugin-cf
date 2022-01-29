@@ -10,18 +10,18 @@ import (
 	"github.com/turbot/steampipe-plugin-sdk/plugin/transform"
 )
 
-func tableCfSpaceV3(ctx context.Context) *plugin.Table {
+func tableCfSpace(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "cf_space_v3",
+		Name:        "cf_space",
 		Description: "Spaces the Cloud Foundry user has access to (v3 API).",
 		List: &plugin.ListConfig{
-			Hydrate: listSpaceV3,
+			Hydrate: listSpace,
 		},
 		Get: &plugin.GetConfig{
 			// name cannot be a key column because it is not unique across orgs
 			KeyColumns:        plugin.SingleColumn("guid"),
 			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
-			Hydrate:           getSpaceV3,
+			Hydrate:           getSpace,
 		},
 		Columns: []*plugin.Column{
 			{
@@ -46,16 +46,16 @@ func tableCfSpaceV3(ctx context.Context) *plugin.Table {
 	}
 }
 
-func listSpaceV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func listSpace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	client, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listSpaceV3", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org.listSpace", "connection_error", err)
 		return nil, err
 	}
 
 	items, err := client.ListV3SpacesByQuery(url.Values{})
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listSpaceV3", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org.listSpace", "query_error", err)
 		return nil, err
 	}
 
@@ -65,10 +65,10 @@ func listSpaceV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData
 	return nil, nil
 }
 
-func getSpaceV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func getSpace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getSpaceV3", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org.getSpace", "connection_error", err)
 		return nil, err
 	}
 
@@ -78,7 +78,7 @@ func getSpaceV3(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData)
 	items, err := conn.ListV3SpacesByQuery(q)
 
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getSpaceV3", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org.getSpace", "query_error", err)
 		return nil, err
 	} else if len(items) == 0 {
 		return nil, nil

@@ -14,12 +14,12 @@ func tableCfOrgV2(ctx context.Context) *plugin.Table {
 		Name:        "cf_org_v2",
 		Description: "Organizations the Cloud Foundry user has access to (v2 API).",
 		List: &plugin.ListConfig{
-			Hydrate: listOrg,
+			Hydrate: listOrgV2,
 		},
 		Get: &plugin.GetConfig{
 			KeyColumns:        plugin.AnyColumn([]string{"guid", "name"}),
 			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
-			Hydrate:           getOrg,
+			Hydrate:           getOrgV2,
 		},
 		Columns: []*plugin.Column{
 			{
@@ -48,15 +48,15 @@ func tableCfOrgV2(ctx context.Context) *plugin.Table {
 	}
 }
 
-func listOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func listOrgV2(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	client, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org_v2.listOrg", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org_v2.listOrgV2", "connection_error", err)
 		return nil, err
 	}
 	items, err := client.ListOrgs()
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org_v2.listOrg", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org_v2.listOrgV2", "query_error", err)
 		return nil, err
 	}
 
@@ -66,10 +66,10 @@ func listOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (i
 	return nil, nil
 }
 
-func getOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
+func getOrgV2(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org_v2.getOrg", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org_v2.getOrgV2", "connection_error", err)
 		return nil, err
 	}
 
@@ -81,7 +81,7 @@ func getOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (in
 	}
 
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org_v2.getOrg", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org_v2.getOrgV2", "query_error", err)
 		return nil, err
 	}
 	return item, err
