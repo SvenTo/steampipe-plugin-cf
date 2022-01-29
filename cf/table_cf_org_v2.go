@@ -9,9 +9,9 @@ import (
 	"github.com/turbot/steampipe-plugin-sdk/plugin/transform"
 )
 
-func tableCfOrg(ctx context.Context) *plugin.Table {
+func tableCfOrgV2(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
-		Name:        "cf_org",
+		Name:        "cf_org_v2",
 		Description: "Organizations the Cloud Foundry user has access to (v2 API).",
 		List: &plugin.ListConfig{
 			Hydrate: listOrg,
@@ -51,12 +51,12 @@ func tableCfOrg(ctx context.Context) *plugin.Table {
 func listOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	client, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listOrg", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org_v2.listOrg", "connection_error", err)
 		return nil, err
 	}
 	items, err := client.ListOrgs()
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listOrg", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org_v2.listOrg", "query_error", err)
 		return nil, err
 	}
 
@@ -69,7 +69,7 @@ func listOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (i
 func getOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getOrg", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_org_v2.getOrg", "connection_error", err)
 		return nil, err
 	}
 
@@ -81,7 +81,7 @@ func getOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (in
 	}
 
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getOrg", "query_error", err)
+		plugin.Logger(ctx).Error("cf_org_v2.getOrg", "query_error", err)
 		return nil, err
 	}
 	return item, err

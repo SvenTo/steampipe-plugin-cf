@@ -1,6 +1,6 @@
-# Table: cf_org
+# Table: cf_org_v2
 
-Retrieve all Cloud Foundry [organizations](https://docs.cloudfoundry.org/concepts/roles.html#orgs) the user has access to.
+Retrieve all Cloud Foundry [organizations](https://docs.cloudfoundry.org/concepts/roles.html#orgs) the user has access to (v2 API).
 
 ## Examples
 
@@ -10,7 +10,7 @@ Retrieve all Cloud Foundry [organizations](https://docs.cloudfoundry.org/concept
 select
   *
 from
-  cf_org
+  cf_org_v2
 ```
 
 ### Get org by name
@@ -19,7 +19,7 @@ from
 select
   *
 from
-  cf_org
+  cf_org_v2
 where
   name = 'sample_org'
 ```
@@ -30,7 +30,7 @@ where
 select
   *
 from
-  cf_org
+  cf_org_v2
 where
   guid = 'deadbeef-4242-4242-dead-beef42420001'
 ```
