@@ -9,16 +9,16 @@ import (
 )
 
 func connect(_ context.Context, d *plugin.QueryData) (*cfclient.Client, error) {
+	var err error
 
-	// Load connection from cache, to
-	// TODO: do not do this if config is loaded from CF home configuration file
+	// Try to load connection from cache
 	cacheKey := "cf"
 	if cachedData, ok := d.ConnectionManager.Cache.Get(cacheKey); ok {
 		return cachedData.(*cfclient.Client), nil
 	}
 
-
-	c, err := cfclient.NewConfigFromCF()
+	spConfig := GetConfig(d.Connection)
+	c, cacheConfig, err := spConfig.convertToCFClientConfig()
 
 	if err != nil {
 		return nil, err
@@ -30,8 +30,19 @@ func connect(_ context.Context, d *plugin.QueryData) (*cfclient.Client, error) {
 		return nil, err
 	}
 
-	// Save to cache
-	d.ConnectionManager.Cache.Set(cacheKey, conn)
+	// In default we don't cache the config so that the most recent auth token is loaded from the CF config file (~/.cf/config.json)
+	if cacheConfig {
+		// Save to cache
+		d.ConnectionManager.Cache.Set(cacheKey, conn)
+	}
 
 	return conn, nil
+}
+
+func derefString(s *string) string {
+	if s != nil {
+		return *s
+	}
+
+	return ""
 }
