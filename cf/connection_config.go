@@ -7,7 +7,6 @@ import (
 )
 
 type cfConfig struct {
-	// TODO: replace with actual config parameters
 	CFHomeDir         *string `cty:"cf_home_dir"`
 	ApiAddress        *string `cty:"api_url"`
 	Username          *string `cty:"user"`
@@ -20,7 +19,6 @@ type cfConfig struct {
 }
 
 var ConfigSchema = map[string]*schema.Attribute{
-	// TODO: replace with actual config parameters
 	"cf_home_dir": {
 		Type: schema.TypeString,
 	},
