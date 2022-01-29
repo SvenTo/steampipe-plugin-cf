@@ -47,6 +47,21 @@ where
 
 ## Get started
 
+### Install
+
+Download latest release from [GitHub](https://github.com/SvenTo/steampipe-plugin-cf/releases/).
+
+Unzip and install the plugin:
+
+```shell
+gzip -d steampipe-plugin-cf_*.gz
+chmod +x steampipe-plugin-cf_*
+mkdir -p ~/.steampipe/plugins/hub.steampipe.io/plugins/svento/cf@latest/
+mv steampipe-plugin-cf_* ~/.steampipe/plugins/hub.steampipe.io/plugins/svento/cf@latest/steampipe-plugin-cf.plugin
+# download default config:
+wget -O ~/.steampipe/config/cf.spc https://raw.githubusercontent.com/SvenTo/steampipe-plugin-cf/main/config/cf.spc
+```
+
 ### Credentials
 
 | Item        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |

@@ -7,6 +7,43 @@ Use SQL to query apps, spaces and more from Cloud Foundry.
 - Community: [Slack Channel](https://join.slack.com/t/steampipe/shared_invite/zt-oij778tv-lYyRTWOTMQYBVAbtPSWs3g)
 - Get involved: [Issues](https://github.com/SvenTo/steampipe-plugin-cf/issues)
 
+## Quick start
+
+Download latest release from [GitHub](https://github.com/SvenTo/steampipe-plugin-cf/releases/).
+
+Unzip and install the plugin:
+
+```shell
+gzip -d steampipe-plugin-cf_*.gz
+chmod +x steampipe-plugin-cf_*
+mkdir -p ~/.steampipe/plugins/hub.steampipe.io/plugins/svento/cf@latest/
+mv steampipe-plugin-cf_* ~/.steampipe/plugins/hub.steampipe.io/plugins/svento/cf@latest/steampipe-plugin-cf.plugin
+# download default config:
+wget -O ~/.steampipe/config/cf.spc https://raw.githubusercontent.com/SvenTo/steampipe-plugin-cf/main/config/cf.spc
+```
+
+Login with the [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/):
+```shell
+cf login
+```
+
+Run a query:
+
+```sql
+select
+  a.name,
+  a.state,
+  s.name as space_name,
+  o.name as org_name
+from
+  cf_app as a,
+  cf_space as s,
+  cf_org as o
+where
+  s.org_guid = o.guid and 
+  a.space_guid = s.guid;
+```
+
 ## Developing
 
 Prerequisites:
