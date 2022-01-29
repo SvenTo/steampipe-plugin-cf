@@ -27,6 +27,13 @@ Login with the [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/):
 cf login
 ```
 
+Try it!
+
+```
+steampipe query
+> .inspect cf
+```
+
 Run a query:
 
 ```sql
