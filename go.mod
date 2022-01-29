@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/cloudfoundry-community/go-cfclient v0.0.0-20220111154238-f50d0fa052b3
-	github.com/turbot/steampipe-plugin-sdk v1.8.2
+	github.com/turbot/steampipe-plugin-sdk v1.8.3
 )
 
 require (
@@ -36,8 +36,6 @@ require (
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
 	github.com/oklog/run v1.0.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.4 // indirect
-	github.com/onsi/ginkgo v1.11.0 // indirect
-	github.com/onsi/gomega v1.7.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sethvargo/go-retry v0.1.0 // indirect
 	github.com/stevenle/topsort v0.0.0-20130922064739-8130c1d7596b // indirect
@@ -52,5 +50,5 @@ require (
 	google.golang.org/genproto v0.0.0-20200526211855-cb27e3aa2013 // indirect
 	google.golang.org/grpc v1.41.0 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
-	gopkg.in/yaml.v2 v2.2.8 // indirect
+	gopkg.in/yaml.v2 v2.2.3 // indirect
 )
