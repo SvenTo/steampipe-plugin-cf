@@ -13,6 +13,29 @@ from
   cf_route_v2
 ```
 
+### Get hostnames of all routes
+
+```sql
+select
+  CONCAT(r.host, '.', d.name) as hostname,
+  r.path,
+  d.internal
+from
+  cf_shared_domain_v2 as d,
+  cf_route_v2 as r
+where
+  r.domain_guid = d.guid
+UNION ALL
+select
+  CONCAT(r.host, '.', p.name) as hostname,
+  r.path,
+  null
+from
+  cf_private_domain_v2 as p,
+  cf_route_v2 as r
+where
+  r.domain_guid = p.guid
+```
 ### Get route by guid
 
 ```sql
