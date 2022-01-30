@@ -6,6 +6,7 @@ Use SQL to query apps, spaces, and more from Cloud Foundry.
 - Documentation: [Table definitions & examples](https://github.com/SvenTo/steampipe-plugin-cf/tree/main/docs/tables)
 - Community: [Slack Channel](https://join.slack.com/t/steampipe/shared_invite/zt-oij778tv-lYyRTWOTMQYBVAbtPSWs3g)
 - Get involved: [Issues](https://github.com/SvenTo/steampipe-plugin-cf/issues)
+  - [Implementation status of CF API resources](https://github.com/SvenTo/steampipe-plugin-cf/issues/1)
 
 ## Quickstart
 
@@ -107,3 +108,5 @@ Please see the [contribution guidelines](https://github.com/turbot/steampipe/blo
 
 - [Steampipe](https://github.com/turbot/steampipe/labels/help%20wanted)
 - [CF Plugin](https://github.com/SvenTo/steampipe-plugin-cf/issues/labels/help%20wanted)
+
+The [GitHub issue #1](https://github.com/SvenTo/steampipe-plugin-cf/issues/1) lists all CF API resources and the implementation status as a Steampipe table.
