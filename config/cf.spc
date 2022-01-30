@@ -14,7 +14,7 @@ connection "cf" {
   # 3. Use credentials explicitly set in a Steampipe config file by setting the option:
   # api_url = "https://api.cf.example.com"
   # 
-  # and either one of the following authentication mechanism:
+  # and either one of the following authentication mechanisms:
   # 
   # 3.1. with username and password:
   # user = "user@example.com"

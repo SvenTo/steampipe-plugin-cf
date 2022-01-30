@@ -1,13 +1,13 @@
 # Cloud Foundry Plugin for Steampipe
 
-Use SQL to query apps, spaces and more from Cloud Foundry.
+Use SQL to query apps, spaces, and more from Cloud Foundry.
 
 - **[Get started →](https://github.com/SvenTo/steampipe-plugin-cf/blob/main/docs/index.md)**
 - Documentation: [Table definitions & examples](https://github.com/SvenTo/steampipe-plugin-cf/tree/main/docs/tables)
 - Community: [Slack Channel](https://join.slack.com/t/steampipe/shared_invite/zt-oij778tv-lYyRTWOTMQYBVAbtPSWs3g)
 - Get involved: [Issues](https://github.com/SvenTo/steampipe-plugin-cf/issues)
 
-## Quick start
+## Quickstart
 
 Download latest release from [GitHub](https://github.com/SvenTo/steampipe-plugin-cf/releases/).
 
@@ -22,7 +22,7 @@ mv steampipe-plugin-cf_* ~/.steampipe/plugins/hub.steampipe.io/plugins/svento/cf
 wget -O ~/.steampipe/config/cf.spc https://raw.githubusercontent.com/SvenTo/steampipe-plugin-cf/main/config/cf.spc
 ```
 
-Login with the [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/):
+Log in with the [Cloud Foundry CLI](https://docs.cloudfoundry.org/cf-cli/):
 ```shell
 cf login
 ```

@@ -12,9 +12,9 @@ og_image: "/images/plugins/svento/cf-social-graphic.png"
 
 # Cloud Foundry + Steampipe
 
-[Cloud Foundry](https://www.cloudfoundry.org/)  is an open source, multi-cloud application platform as a service (PaaS).
+[Cloud Foundry](https://www.cloudfoundry.org/)  is an open-source, multi-cloud application platform as a service (PaaS).
 
-[Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
+[Steampipe](https://steampipe.io) is an open-source CLI to instantly query cloud APIs using SQL.
 
 List apps in your Cloud Foundry account:
 
@@ -50,7 +50,7 @@ where
 
 ### Install
 
-Download latest release from [GitHub](https://github.com/SvenTo/steampipe-plugin-cf/releases/).
+Download the latest release from [GitHub](https://github.com/SvenTo/steampipe-plugin-cf/releases/).
 
 Unzip and install the plugin:
 
@@ -67,8 +67,8 @@ wget -O ~/.steampipe/config/cf.spc https://raw.githubusercontent.com/SvenTo/stea
 
 | Item        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Credentials | Use the `cf login` command to setup your Cloud Foundry Connection or explicitly configure credentials in the Steampipe config file.                                                                                                                                                                                                                                                                                                                                                                                         |
-| Permissions | The results depends on the given [permissions](https://docs.cloudfoundry.org/concepts/roles.html#permissions) of your Cloud Foundry user. You will only see the spaces and orgs you have access to unless you have the *Admin (Read-only)* or *Global Auditor* roles. A detailed documentation about the permissions can be found in the [CF documentation](https://docs.cloudfoundry.org/concepts/roles.html#permissions).                                                                                                 |
+| Credentials | Use the `cf login` command to set up your Cloud Foundry Connection or explicitly configure credentials in the Steampipe config file.                                                                                                                                                                                                                                                                                                                                                                                        |
+| Permissions | The results depend on the given [permissions](https://docs.cloudfoundry.org/concepts/roles.html#permissions) of your Cloud Foundry user. You will only see the spaces and orgs you have access to unless you have the *Admin (Read-only)* or *Global Auditor* roles. Detailed documentation about the permissions can be found in the [CF documentation](https://docs.cloudfoundry.org/concepts/roles.html#permissions).                                                                                                    |
 | Radius      | Each connection represents the view of a single Cloud Foundry user.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | Resolution  | 1. Credentials explicitly set in a Steampipe config file (`~/.steampipe/config/cf.spc`).<br />2. Credentials from the ``.cf/config.json`` in the directory specified by the ``cf_home_dir`` parameter.<br />3. Credentials specified from the ``config.json`` located in the ``~/.cf`` directory. You can relocate the ``.cf/config.json`` file using the ``CF_HOME`` environment variable. This file will be generated by the [``cf login`` CLI command](https://docs.cloudfoundry.org/cf-cli/getting-started.html#login). |
 
@@ -82,11 +82,11 @@ connection "cf" {
 }
 ```
 
-This will create a `cf` connection that uses the [Cloud Foundry CLI configuration](https://docs.cloudfoundry.org/cf-cli/) file from default config directory (typically ``~/.cf/config.json`` on *nix systems). Depending on your configuration, you may need to be [logged in](https://docs.cloudfoundry.org/cf-cli/getting-started.html#login) with the CF CLI. Use [``cf login``](https://docs.cloudfoundry.org/cf-cli/getting-started.html#login) if you get the error ``(CF-InvalidAuthToken|1000): Invalid Auth Token``.
+This will create a `cf` connection that uses the [Cloud Foundry CLI configuration](https://docs.cloudfoundry.org/cf-cli/) file from the default config directory (typically ``~/.cf/config.json`` on *nix systems). Depending on your configuration, you may need to be [logged in](https://docs.cloudfoundry.org/cf-cli/getting-started.html#login) with the CF CLI. Use [``cf login``](https://docs.cloudfoundry.org/cf-cli/getting-started.html#login) if you get the error ``(CF-InvalidAuthToken|1000): Invalid Auth Token``.
 
 ## Advanced configuration options
 
-You don't need to install the [Cloud Foundry CLI configuration](https://docs.cloudfoundry.org/cf-cli/) to login to your Cloud Foundry API. You can also define credentials directly in the Steampipe config file.
+You don't need to install the [Cloud Foundry CLI configuration](https://docs.cloudfoundry.org/cf-cli/) to log in to your Cloud Foundry API. You can also define credentials directly in the Steampipe config file.
 
 You can also specify the path to a configuration file.
 
@@ -99,7 +99,7 @@ connection "cf" {
   # Use credentials explicitly set in a Steampipe config file by setting the option:
   api_url = "https://api.cf.example.com"
   # 
-  # and either one of the following authentication mechanism:
+  # and either one of the following authentication mechanisms:
   # 
   # 3.1. with username and password:
   # username = "user@example.com"
@@ -114,7 +114,7 @@ connection "cf" {
 }
 ```
 
-### Define path to configuration file
+### Define a path to a configuration file
 
 ```hcl
 connection "cf" {
