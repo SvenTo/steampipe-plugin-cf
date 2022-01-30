@@ -26,6 +26,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"cf_private_domain_v2": tableCfPrivateDomainV2(ctx),
 			"cf_shared_domain_v2":  tableCfSharedDomainV2(ctx),
 			"cf_buildpack_v2":      tableCfBuildpackV2(ctx),
+			"cf_security_group_v2": tableCfSecGroupV2(ctx),
 		},
 	}
 	return p
