@@ -47,8 +47,8 @@ func tableCfRouteV2(ctx context.Context) *plugin.Table {
 				Transform:   transform.FromField("ServiceInstanceGuid").NullIfZero(),
 			},
 			{Name: "port", Type: proto.ColumnType_INT, Description: "The port that the route listens on. Only compatible with routes specifying the tcp protocol."},
-			{Name: "created_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was created."},
-			{Name: "updated_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was last updated."},
+			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "The time with zone when the object was created."},
+			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "The time with zone when the object was last updated."},
 		},
 	}
 }

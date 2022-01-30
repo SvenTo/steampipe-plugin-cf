@@ -29,8 +29,8 @@ func tableCfSharedDomainV2(ctx context.Context) *plugin.Table {
 				Transform:   transform.FromField("Guid"),
 			},
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Name of the shared domain. Must be between 3 ~ 253 characters and follow RFC 1035."},
-			{Name: "created_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was created."},
-			{Name: "updated_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was last updated."},
+			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "The time with zone when the object was created."},
+			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "The time with zone when the object was last updated."},
 			{
 				Name:        "router_group_guid",
 				Type:        proto.ColumnType_STRING,

@@ -30,8 +30,8 @@ func tableCfOrgV2(ctx context.Context) *plugin.Table {
 			},
 			{Name: "name", Type: proto.ColumnType_STRING, Description: "Name of the organization."},
 			{Name: "status", Type: proto.ColumnType_STRING, Description: "Status of the organization."},
-			{Name: "created_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was created."},
-			{Name: "updated_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was last updated."},
+			{Name: "created_at", Type: proto.ColumnType_TIMESTAMP, Description: "The time with zone when the object was created."},
+			{Name: "updated_at", Type: proto.ColumnType_TIMESTAMP, Description: "The time with zone when the object was last updated."},
 			{
 				Name:        "quota_definition_guid",
 				Type:        proto.ColumnType_STRING,
