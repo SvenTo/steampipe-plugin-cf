@@ -14,7 +14,6 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			NewInstance: ConfigInstance,
 			Schema:      ConfigSchema,
 		},
-		// TODO: check if correct:
 		DefaultTransform: transform.FromGo().NullIfZero(),
 		TableMap: map[string]*plugin.Table{
 			"cf_org_v2":  tableCfOrgV2(ctx),

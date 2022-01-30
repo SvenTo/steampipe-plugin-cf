@@ -76,6 +76,9 @@ func getOrg(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (in
 	if err != nil {
 		plugin.Logger(ctx).Error("cf_org.getOrg", "query_error", err)
 		return nil, err
+	} else if len(items) == 0 {
+		return nil, nil
 	}
+
 	return items[0], err
 }

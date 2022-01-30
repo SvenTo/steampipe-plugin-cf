@@ -18,7 +18,6 @@ func tableCfApp(ctx context.Context) *plugin.Table {
 			Hydrate: listApp,
 		},
 		Get: &plugin.GetConfig{
-			// TODO: Add organization_guid
 			KeyColumns:        plugin.SingleColumn("guid"),
 			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
 			Hydrate:           getApp,
@@ -81,8 +80,10 @@ func getApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (in
 	if err != nil {
 		plugin.Logger(ctx).Error("cf_org.getApp", "query_error", err)
 		return nil, err
+	} else if len(items) == 0 {
+		return nil, nil
 	}
-	// TODO: check for length
+
 	return items[0], err
 }
 
