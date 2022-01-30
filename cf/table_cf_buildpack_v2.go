@@ -17,7 +17,7 @@ func tableCfBuildpackV2(ctx context.Context) *plugin.Table {
 			Hydrate: listBuildpackV2,
 		},
 		Get: &plugin.GetConfig{
-			KeyColumns:        plugin.AnyColumn([]string{"guid", "name"}),
+			KeyColumns:        plugin.SingleColumn("guid"),
 			ShouldIgnoreError: isNotFoundError(10000), // cfclient error (CF-NotFound|10000)
 			Hydrate:           getBuildpackV2,
 		},
