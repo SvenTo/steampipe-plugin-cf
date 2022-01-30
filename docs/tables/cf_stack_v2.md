@@ -4,7 +4,7 @@ Retrieve all Cloud Foundry [stacks](https://docs.cloudfoundry.org/buildpacks/sta
 
 ## Examples
 
-### Get all stack the user has access to
+### Get all stacks
 
 ```sql
 select
