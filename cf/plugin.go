@@ -16,11 +16,12 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		},
 		DefaultTransform: transform.FromGo().NullIfZero(),
 		TableMap: map[string]*plugin.Table{
-			"cf_org_v2":  tableCfOrgV2(ctx),
-			"cf_org":     tableCfOrg(ctx),
-			"cf_space":   tableCfSpace(ctx),
-			"cf_app":     tableCfApp(ctx),
-			"cf_info_v2": tableCfInfoV2(ctx),
+			"cf_org_v2":   tableCfOrgV2(ctx),
+			"cf_org":      tableCfOrg(ctx),
+			"cf_space":    tableCfSpace(ctx),
+			"cf_app":      tableCfApp(ctx),
+			"cf_info_v2":  tableCfInfoV2(ctx),
+			"cf_stack_v2": tableCfStackV2(ctx),
 		},
 	}
 	return p
