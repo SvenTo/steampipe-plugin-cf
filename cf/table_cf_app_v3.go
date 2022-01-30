@@ -50,12 +50,12 @@ func tableCfApp(ctx context.Context) *plugin.Table {
 func listApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	client, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listApp", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_app.listApp", "connection_error", err)
 		return nil, err
 	}
 	items, err := client.ListV3AppsByQuery(url.Values{})
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listApp", "query_error", err)
+		plugin.Logger(ctx).Error("cf_app.listApp", "query_error", err)
 		return nil, err
 	}
 
@@ -68,7 +68,7 @@ func listApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (i
 func getApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getApp", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_app.getApp", "connection_error", err)
 		return nil, err
 	}
 
@@ -78,7 +78,7 @@ func getApp(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (in
 	items, err := conn.ListV3AppsByQuery(q)
 
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getApp", "query_error", err)
+		plugin.Logger(ctx).Error("cf_app.getApp", "query_error", err)
 		return nil, err
 	} else if len(items) == 0 {
 		return nil, nil

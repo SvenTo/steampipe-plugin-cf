@@ -49,13 +49,13 @@ func tableCfSpace(ctx context.Context) *plugin.Table {
 func listSpace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	client, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listSpace", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_space.listSpace", "connection_error", err)
 		return nil, err
 	}
 
 	items, err := client.ListV3SpacesByQuery(url.Values{})
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.listSpace", "query_error", err)
+		plugin.Logger(ctx).Error("cf_space.listSpace", "query_error", err)
 		return nil, err
 	}
 
@@ -68,7 +68,7 @@ func listSpace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) 
 func getSpace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (interface{}, error) {
 	conn, err := connect(ctx, d)
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getSpace", "connection_error", err)
+		plugin.Logger(ctx).Error("cf_space.getSpace", "connection_error", err)
 		return nil, err
 	}
 
@@ -78,7 +78,7 @@ func getSpace(ctx context.Context, d *plugin.QueryData, _ *plugin.HydrateData) (
 	items, err := conn.ListV3SpacesByQuery(q)
 
 	if err != nil {
-		plugin.Logger(ctx).Error("cf_org.getSpace", "query_error", err)
+		plugin.Logger(ctx).Error("cf_space.getSpace", "query_error", err)
 		return nil, err
 	} else if len(items) == 0 {
 		return nil, nil
