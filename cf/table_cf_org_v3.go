@@ -17,9 +17,8 @@ func tableCfOrg(ctx context.Context) *plugin.Table {
 			Hydrate: listOrg,
 		},
 		Get: &plugin.GetConfig{
-			KeyColumns:        plugin.AnyColumn([]string{"guid", "name"}),
-			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
-			Hydrate:           getOrg,
+			KeyColumns: plugin.AnyColumn([]string{"guid", "name"}),
+			Hydrate:    getOrg,
 		},
 		Columns: []*plugin.Column{
 			{

@@ -19,9 +19,8 @@ func tableCfSpace(ctx context.Context) *plugin.Table {
 		},
 		Get: &plugin.GetConfig{
 			// name cannot be a key column because it is not unique across orgs
-			KeyColumns:        plugin.SingleColumn("guid"),
-			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
-			Hydrate:           getSpace,
+			KeyColumns: plugin.SingleColumn("guid"),
+			Hydrate:    getSpace,
 		},
 		Columns: []*plugin.Column{
 			{

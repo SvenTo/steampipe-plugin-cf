@@ -18,9 +18,8 @@ func tableCfApp(ctx context.Context) *plugin.Table {
 			Hydrate: listApp,
 		},
 		Get: &plugin.GetConfig{
-			KeyColumns:        plugin.SingleColumn("guid"),
-			ShouldIgnoreError: isNotFoundError(30003), // cfclient error (CF-OrganizationNotFound|30003)
-			Hydrate:           getApp,
+			KeyColumns: plugin.SingleColumn("guid"),
+			Hydrate:    getApp,
 		},
 		Columns: []*plugin.Column{
 			{
