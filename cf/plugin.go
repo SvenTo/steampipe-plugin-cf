@@ -22,6 +22,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 			"cf_app":      tableCfApp(ctx),
 			"cf_info_v2":  tableCfInfoV2(ctx),
 			"cf_stack_v2": tableCfStackV2(ctx),
+			"cf_route_v2": tableCfRouteV2(ctx),
 		},
 	}
 	return p
