@@ -12,7 +12,7 @@ import (
 func tableCfRouteV2(ctx context.Context) *plugin.Table {
 	return &plugin.Table{
 		Name:        "cf_route_v2",
-		Description: "$Descr the Cloud Foundry user has access to (v2 API).",
+		Description: "Routes the Cloud Foundry user has access to (v2 API).",
 		List: &plugin.ListConfig{
 			Hydrate: listRouteV2,
 		},
@@ -29,7 +29,7 @@ func tableCfRouteV2(ctx context.Context) *plugin.Table {
 				Transform:   transform.FromField("Guid"),
 			},
 			{Name: "host", Type: proto.ColumnType_STRING, Description: "The hostname for the route; not compatible with routes specifying the tcp protocol;"},
-			{Name: "path", Type: proto.ColumnType_STRING, Description: "The path for the route; not compatible with routes specifying the tcp protocol;"},
+			{Name: "path", Type: proto.ColumnType_STRING, Description: "The path for the route; not compatible with routes specifying the tcp protocol;", Transform: transform.FromGo()},
 			{
 				Name: "domain_guid", Type: proto.ColumnType_STRING,
 				Description: "The guid to the domain of the route.",
@@ -44,7 +44,7 @@ func tableCfRouteV2(ctx context.Context) *plugin.Table {
 			{
 				Name: "service_instance_guid", Type: proto.ColumnType_STRING,
 				Description: "The guid to the service instance of the route.",
-				Transform:   transform.FromField("ServiceInstanceGuid"),
+				Transform:   transform.FromField("ServiceInstanceGuid").NullIfZero(),
 			},
 			{Name: "port", Type: proto.ColumnType_INT, Description: "The port that the route listens on. Only compatible with routes specifying the tcp protocol."},
 			{Name: "created_at", Type: proto.ColumnType_STRING, Description: "The time with zone when the object was created."},
