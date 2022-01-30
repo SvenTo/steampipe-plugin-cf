@@ -1,6 +1,6 @@
 # Table: cf_buildpack_v2
 
-Retrieve all Cloud Foundry [buildpacks](https://docs.cloudfoundry.org/buildpacks/stack-association.html) ([v2](https://apidocs.cloudfoundry.org/16.22.0/stacks/list_all_stacks.html)) the user has access to. Buildpacks are used during a build to download external dependencies and transform a package into an executable droplet. In this way, buildpacks are a pluggable extension to Cloud Foundry that enable CF to run different languages and frameworks. Buildpacks will automatically detect if they support an application. Buildpacks can also be explicitly specified on apps and builds.
+Retrieve all Cloud Foundry [buildpacks](https://docs.cloudfoundry.org/buildpacks/using-buildpacks.html) ([v2](https://apidocs.cloudfoundry.org/16.22.0/buildpacks/list_all_buildpacks.html)) the user has access to. Buildpacks are used during a build to download external dependencies and transform a package into an executable droplet. In this way, buildpacks are a pluggable extension to Cloud Foundry that enable CF to run different languages and frameworks. Buildpacks will automatically detect if they support an application. Buildpacks can also be explicitly specified on apps and builds.
 
 ## Examples
 
